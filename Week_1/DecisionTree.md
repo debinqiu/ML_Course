@@ -66,4 +66,4 @@ PROC FREQ DATA = credit_pred;
 TABLES Actual*Predicted /norow nocol nopct;
 RUN;
 ```
-![Image of Yaktocat](https://github.com/debinqiu/yaktocat.png)
+![cost_comp_sas](https://cloud.githubusercontent.com/assets/16762941/12804239/5286cfb8-cabf-11e5-9aee-8a490e5bbf1a.png)
