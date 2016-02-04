@@ -4,7 +4,7 @@ This post intends to finish the first assignment of course “Machine Learning f
 
 In this assignment, I used the finicial data which contains information on loans obtained from a credit agency in Germany. This data can be available from UCI Machine Learning Data Repository on https://archive.ics.uci.edu/ml. There are total 1000 observations in this data. The target is **default** which is a binary variable: 'yes' and 'no', meaning whether the loan goes into default. The explanatory variables consist of the following 16 components: &quot;checking_balance&quot;, &quot;months_loan_duration&quot;, &quot;credit_history&quot;,       &quot;purpose&quot;, &quot;amount&quot;, &quot;savings_balance&quot;, &quot;employment_duration&quot;, &quot;percent_of_income&quot;, &quot;years_at_residence&quot;, &quot;age&quot;, &quot;other_credit&quot;, &quot;housing&quot;, &quot;existing_loans_count&quot;, &quot;job&quot;, &quot;dependents&quot;, &quot;phone&quot;.
 
-To identify the risky bank loans, we build a decision tree model using different programming languages such as SAS, Python and R.
+To identify the risky bank loans, we build a decision tree model using different programming languages such as SAS, Python and R. To get the dataset, please go to https://github.com/debinqiu/ML_Course/issues and download *credit.txt* and convert to *credit.csv* file.
 
 ##1. Fit decision tree in SAS##
 The decision tree is conducted by PROC HPSPLIT in SAS. To build the decision tree on training and testing data, we first randomly shuffle the original data and select the first 700 observations as training data and the rest as testing data. 
