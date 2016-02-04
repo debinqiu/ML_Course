@@ -69,7 +69,7 @@ RUN;
 
 ![cost_comp_sas](https://cloud.githubusercontent.com/assets/16762941/12804239/5286cfb8-cabf-11e5-9aee-8a490e5bbf1a.png)
 
-The trend of cost complexity analysis shows that the smallest average ASE (0.176) obtains at cost complexity parameter = 0.0068. Let's look at the graph of fitted tree as follows. We can see that the most four important features are checking_balance, month_loan_duration, credit_history and savings_balance. 
+The trend of cost complexity analysis shows that the smallest average ASE (0.176) obtains at cost complexity parameter = 0.0068. Let's look at the graph of fitted tree as follows. We can see that the most four important features are checking_balance, month_loan_duration, credit_history and savings_balance. To interpret the tree, we see that if the checking_balance is greater than 200 DM or unknown, 318 samples are classified as 'no' and 87.74% of them are truly 'no' in the training data.
 
 ![tree_sas](https://cloud.githubusercontent.com/assets/16762941/12804299/fdf6fecc-cabf-11e5-956f-23c8575640e3.png)
 
