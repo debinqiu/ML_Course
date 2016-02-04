@@ -163,5 +163,7 @@ We finally build a decision tree in R using `rpart` package. In fact, there are 
 > library(rpart.plot)
 > rpart.plot(credit_model,under = TRUE,faclen = 3,extra = 106)
 ```
-The fitted model gives an accuracy of 74% on testing data with 300 observations, which is higher than those obtained from SAS and Python. Also, we also have the following graph of tree, which is simpler than that from Python but a bit more complex than that from SAS, but the frist four important features are the same as those fitted by SAS.
+The fitted model gives an accuracy of 74% on testing data with 300 observations, which is higher than those obtained from SAS and Python. Also, we also have the following graph of tree, which is simpler than that from Python but a bit more complex than that from SAS. We can also see now the first four important features are checking_balance, month_loan_duration, employment_duration and credit_history which are slightly different from those in SAS.
+
+![tree_r](https://cloud.githubusercontent.com/assets/16762941/12804930/77c86ede-cac5-11e5-97eb-8dea1aa194f3.png)
 
