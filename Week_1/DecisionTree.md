@@ -6,7 +6,7 @@ In this assignment, I used the finicial data which contains information on loans
 
 To identify the risky bank loans, we build a decision tree model using different programming languages such as SAS, Python and R.
 
-##1. Fit the decision tree in SAS##
+##1. Fit decision tree in SAS##
 The decision tree is conducted by PROC HPSPLIT in SAS. To build the decision tree on training and testing data, we first randomly shuffle the original data and select the first 700 observations as training data and the rest as testing data. 
 The SAS code is as follows.
 ```
@@ -134,3 +134,34 @@ array([[220,  66],
 >>> sklearn.metrics.accuracy_score(tar_test, predictions)
 Out[3]: 0.68999999999999995
 ```
+
+![tree_python](https://cloud.githubusercontent.com/assets/16762941/12804810/397d63c4-cac4-11e5-8a9e-259b8f45391a.png)
+
+## 3. Fit decision tree in R ##
+We finally build a decision tree in R using `rpart` package. In fact, there are several other packages such as `tree`, `C5.0` to fit such model. Here we only use `rpart` package for simplicity. The R code is as follows.
+```
+> credit <- read.csv("credit.csv")
+> #Split into training and testing sets
+> set.seed(123)
+> train_sample <- sample(1000,700)
+> credit_train <- credit[train_sample,]
+> credit_test <- credit[-train_sample,]
+> X_train <- credit_train[-c(which(colnames(credit) %in% 'default'))]
+> X_test <- credit_test[-c(which(colnames(credit) %in% 'default'))]
+> 
+> # Build model on training data
+> library(rpart)
+> credit_model <- rpart(default~.,data = credit_train)
+> 
+> # Make predictions on testing data
+> credit_pred <- predict(credit_model,X_test, type = 'class')
+> # accuracy
+> sum(diag(table(credit_test$default,credit_pred)))/300
+[1] 0.74
+> 
+> # Displaying the decision tree
+> library(rpart.plot)
+> rpart.plot(credit_model,under = TRUE,faclen = 3,extra = 106)
+```
+The fitted model gives an accuracy of 74% on testing data with 300 observations, which is higher than those obtained from SAS and Python. Also, we also have the following graph of tree, which is simpler than that from Python but a bit more complex than that from SAS, but the frist four important features are the same as those fitted by SAS.
+
