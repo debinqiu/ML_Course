@@ -67,3 +67,4 @@ TABLES Actual*Predicted /norow nocol nopct;
 RUN;
 ```
 ![cost_comp_sas](https://cloud.githubusercontent.com/assets/16762941/12804239/5286cfb8-cabf-11e5-9aee-8a490e5bbf1a.png)
+The trend of cost complexity shows that the smallest average ASE (0.176) obtains at cost complexity parameter = 0.0068. Let's look at the graph of fitted tree as follows. 
