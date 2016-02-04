@@ -76,3 +76,61 @@ The trend of cost complexity shows that the smallest average ASE (0.176) obtains
 Finally, let's check the accuracy of the fitted decision tree on testing data. The confusion matrix gives us the accuracy of 59% which is somewhat low. However, the result can be improved by using random forest or gradient boosting that will be covered in the latter course.
 
 ![conf_mat_sas](https://cloud.githubusercontent.com/assets/16762941/12804393/da77c714-cac0-11e5-85e4-71659664e8a7.png)
+
+
+## 2. Fit decision tree in Python ##
+Python `sklearn` package provides numerous functions to perform machine learning methods, including decision tree. We now give the Python code to fit the decision tree for bank loan data. 
+
+```Python
+import pandas as pd
+import os
+from sklearn.cross_validation import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import sklearn.metrics
+from sklearn.preprocessing import LabelEncoder
+os.chdir('/Users/Deman/Desktop/Dropbox/ML')
+
+credit = pd.read_csv("credit.csv")
+
+credit = credit.dropna()
+targets = LabelEncoder().fit_transform(credit['default'])
+
+predictors = credit.ix[:,credit.columns != 'default']
+
+# Recode categorical variables as numeric variables
+for i in range(0,len(predictors.dtypes)):
+    if predictors.dtypes[i] != 'int64':
+        predictors[predictors.columns[i]] = LabelEncoder().fit_transform(predictors[predictors.columns[i]])
+
+pred_train, pred_test, tar_train, tar_test = train_test_split(predictors, targets, test_size=.4)
+
+#Build model on training data
+classifier = DecisionTreeClassifier().fit(pred_train,tar_train)
+predictions = classifier.predict(pred_test)
+
+sklearn.metrics.confusion_matrix(tar_test,predictions)
+sklearn.metrics.accuracy_score(tar_test, predictions)
+
+#Displaying the decision tree
+from sklearn import tree
+#from StringIO import StringIO
+from io import StringIO
+#from StringIO import StringIO 
+from IPython.display import Image
+out = StringIO()
+tree.export_graphviz(classifier, out_file=out)
+import pydotplus
+graph=pydotplus.graph_from_dot_data(out.getvalue())
+Image(graph.create_png())
+```
+Since Python does not provide pruing on the decision tree, the classification accuracy (69%) may be higher than that from SAS. Also, it results in a large tree shown in the following graph and overfitting.
+
+```Python
+>>> sklearn.metrics.confusion_matrix(tar_test,predictions)
+Out[2]: 
+array([[220,  66],
+       [ 58,  56]])
+
+>>> sklearn.metrics.accuracy_score(tar_test, predictions)
+Out[3]: 0.68999999999999995
+```
