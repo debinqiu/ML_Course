@@ -81,7 +81,7 @@ Finally, let's check the accuracy of the fitted decision tree on testing data. T
 ## 2. Fit decision tree in Python ##
 Python `sklearn` package provides numerous functions to perform machine learning methods, including decision tree. We now give the Python code to fit the decision tree for bank loan data. 
 
-```Python
+```python
 import pandas as pd
 import os
 from sklearn.cross_validation import train_test_split
@@ -125,7 +125,7 @@ Image(graph.create_png())
 ```
 Since Python does not provide pruing on the decision tree, the classification accuracy (69%) may be higher than that from SAS. Also, it results in a large tree shown in the following graph and overfitting.
 
-```Python
+```python
 >>> sklearn.metrics.confusion_matrix(tar_test,predictions)
 Out[2]: 
 array([[220,  66],
@@ -139,7 +139,7 @@ Out[3]: 0.68999999999999995
 
 ## 3. Fit decision tree in R ##
 We finally build a decision tree in R using `rpart` package. In fact, there are several other packages such as `tree`, `C5.0` to fit such model. Here we only use `rpart` package for simplicity. The R code is as follows.
-```
+```r
 > credit <- read.csv("credit.csv")
 > str(credit)
 'data.frame':	1000 obs. of  17 variables:
