@@ -72,4 +72,4 @@ The trend of cost complexity shows that the smallest average ASE (0.176) obtains
 ![tree_sas](https://cloud.githubusercontent.com/assets/16762941/12804299/fdf6fecc-cabf-11e5-956f-23c8575640e3.png)
 
 Finally, let's check the accuracy of the fitted decision tree on testing data. The confusion matrix gives us the accuracy of 59% which is somewhat low.
-
+![conf_mat_sas](https://cloud.githubusercontent.com/assets/16762941/12804393/da77c714-cac0-11e5-85e4-71659664e8a7.png)
