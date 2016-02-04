@@ -1,8 +1,8 @@
 # Identify risky bank loans using decision tree #
 
-This post intends to finish the first assignment of course “Machine Learning for Data Analysis” on coursera.  We are assigned to perform a decision tree analysis to test nonlinear relationships among a series of explanatory variables and a binary, categorical response variable.
+This post intends to finish the first assignment of course “Machine Learning for Data Analysis” on coursera. We are assigned to perform a decision tree analysis to test nonlinear relationships among a series of explanatory variables and a binary, categorical response variable.
 
-In this assignment, I used the finicial data which contains information on loans obtained from a credit agency in Germany. This data can be available from UCI Machine Learning Data Repository on https://archive.ics.uci.edu/ml. There are total 1000 observations in this data. The target is **default** which is a binary variable: 'yes' and 'no', meaning whether the loan goes into default. The explanatory variables consist of the following 16 components: &quot;checking_balance&quot;, &quot;months_loan_duration&quot;, &quot;credit_history&quot;,       &quot;purpose&quot;, &quot;amount&quot;, &quot;savings_balance&quot;, &quot;employment_duration&quot;, &quot;percent_of_income&quot;, &quot;years_at_residence&quot;, &quot;age&quot;, &quot;other_credit&quot;, &quot;housing&quot;, &quot;existing_loans_count&quot;, &quot;job&quot;, &quot;dependents&quot;,  &quot;phone&quot;. The details of each features can be seen in Section 3 `str(credit)`.
+In this assignment, I used finicial data which contains information on loans obtained from a credit agency in Germany. This data can be downloaded from UCI Machine Learning Data Repository on https://archive.ics.uci.edu/ml. There are total 1000 observations and 17 features in this data. The target is **default** which is a binary variable: 'yes' and 'no', meaning whether the loan went into default. The explanatory variables consist of the following 16 components: &quot;checking_balance&quot;, &quot;months_loan_duration&quot;, &quot;credit_history&quot;,       &quot;purpose&quot;, &quot;amount&quot;, &quot;savings_balance&quot;, &quot;employment_duration&quot;, &quot;percent_of_income&quot;, &quot;years_at_residence&quot;, &quot;age&quot;, &quot;other_credit&quot;, &quot;housing&quot;, &quot;existing_loans_count&quot;, &quot;job&quot;, &quot;dependents&quot;,  &quot;phone&quot;. The details of each features can be seen in Section 3 `str(credit)`.
 
 To identify the risky bank loans, we build a decision tree model using different programming languages such as SAS, Python and R. To get the dataset, please go to https://github.com/debinqiu/ML_Course/issues and download *credit.txt* and convert to *credit.csv* file.
 
@@ -69,17 +69,17 @@ RUN;
 
 ![cost_comp_sas](https://cloud.githubusercontent.com/assets/16762941/12804239/5286cfb8-cabf-11e5-9aee-8a490e5bbf1a.png)
 
-The trend of cost complexity shows that the smallest average ASE (0.176) obtains at cost complexity parameter = 0.0068. Let's look at the graph of fitted tree as follows. We can see that the most four important features are checking_balance, month_loan_duration, credit_history and savings_balance. 
+The trend of cost complexity analysis shows that the smallest average ASE (0.176) obtains at cost complexity parameter = 0.0068. Let's look at the graph of fitted tree as follows. We can see that the most four important features are checking_balance, month_loan_duration, credit_history and savings_balance. 
 
 ![tree_sas](https://cloud.githubusercontent.com/assets/16762941/12804299/fdf6fecc-cabf-11e5-956f-23c8575640e3.png)
 
-Finally, let's check the accuracy of the fitted decision tree on testing data. The confusion matrix gives us the accuracy of 59% ((145 + 32)/300) which is somewhat low. However, the result can be improved by using random forest or gradient boosting that will be covered in the latter course.
+Finally, let's check the accuracy of the fitted decision tree on testing data. The confusion matrix gives us the accuracy of 59% ((145 + 32)/300) which is somewhat low. However, the result can be improved by using random forest or gradient boosting that will be covered in the latter section.
 
 ![conf_mat_sas](https://cloud.githubusercontent.com/assets/16762941/12804393/da77c714-cac0-11e5-85e4-71659664e8a7.png)
 
 
 ## 2. Fit decision tree in Python ##
-Python `sklearn` package provides numerous functions to perform machine learning methods, including decision tree. We now give the Python code to fit the decision tree for bank loan data. 
+Python `sklearn` package provides numerous functions to perform machine learning methods, including decision tree. We now give the Python code to fit the decision tree for bank loans data. 
 
 ```python
 import pandas as pd
@@ -98,6 +98,7 @@ targets = LabelEncoder().fit_transform(credit['default'])
 predictors = credit.ix[:,credit.columns != 'default']
 
 # Recode categorical variables as numeric variables
+predictors.dtypes
 for i in range(0,len(predictors.dtypes)):
     if predictors.dtypes[i] != 'int64':
         predictors[predictors.columns[i]] = LabelEncoder().fit_transform(predictors[predictors.columns[i]])
@@ -123,7 +124,7 @@ import pydotplus
 graph=pydotplus.graph_from_dot_data(out.getvalue())
 Image(graph.create_png())
 ```
-Since Python does not provide pruing on the decision tree, the classification accuracy (69%) may be higher than that from SAS. Also, it results in a large tree shown in the following graph and overfitting.
+Since Python does not provide pruing on the decision tree, the classification accuracy (69%) may be higher than that from SAS. Also, it results in a huge tree shown in the following graph. Without pruning, the tree is more likely to overfit the data.
 
 ```python
 >>> sklearn.metrics.confusion_matrix(tar_test,predictions)
