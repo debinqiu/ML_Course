@@ -158,7 +158,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 import sklearn.metrics
 from sklearn.preprocessing import LabelEncoder
-import matplotlib as plt
+import matplotlib.pylab as plt
 
 credit = pd.read_csv("credit.txt",sep = "\t")
 
