@@ -225,7 +225,7 @@ Out[40]: 0.73999999999999999
 We also explore the importane of 16 explanatory variables. The first three most important explanatory variables are checking_balance, amount, months_loan_duration which are slightly different from those obtained in R. 
 ```python
 # Display the relative importance of each attribute
-print(pd.Series(model.feature_importances_, index = predictors.columns).sort_values(ascending = False))
+>>> print(pd.Series(model.feature_importances_, index = predictors.columns).sort_values(ascending = False))
 checking_balance        0.133015
 amount                  0.109541
 months_loan_duration    0.096196
@@ -261,3 +261,5 @@ Out[43]:
 150     0.736667
 dtype: float64
 ```
+
+## Run random forest in Apache Spark##
