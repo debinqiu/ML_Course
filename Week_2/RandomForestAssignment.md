@@ -22,7 +22,7 @@ The **explanatory variables** consist of the following 16 components:
 
 The dataset can be downloaded [here] (https://github.com/debinqiu/ML_Course/files/116846/credit.txt) and more information about this dataset is available on [UCI Machine Learning Data Repository] (https://archive.ics.uci.edu/ml).  
 
-To identify the risky bank loans, we build a random forest model using different programming languages in SAS, Python, R and Spark.
+To identify the risky bank loans, we build a random forest model using different programming languages in SAS, R and Python.
 
 ## Run random forest in SAS ##
 We use HPFOREST procedure in SAS to run the random forest which builds many decision trees ranther than a single decision tree in order to improve the accuracy of prediction. In the fitting procedure, we first randomly split the entire data into training set with 700 observations and testing set with 300 observations. We then run the random forest on the training data and make predictions on testing data using HP4SCORE procedure. 
@@ -266,4 +266,3 @@ dtype: float64
 ```
 ![accuracy_p](https://cloud.githubusercontent.com/assets/16762941/12930934/23526c6e-cf49-11e5-9a11-de2044197afc.png)
 
-## Run random forest in Apache Spark##
