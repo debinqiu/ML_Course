@@ -244,7 +244,7 @@ phone                   0.030843
 dependents              0.021698
 dtype: float64
 ```
-Similar to the study in R code, we finally run random forest with different number of decision trees. The results show that we obtain 76% accuracy when the number of trees is 850 or 250. We would definitely choose 250 due to less computation time.  
+Similar to the study in R code, we finally run random forest with different number of decision trees. The results show that we obtain the highest 76% accuracy when the number of trees is 850 or 250. We would definitely choose 250 due to less computation time.  
 ```python
 >>> pd.Series(accuracy, index = ntree).sort_values(ascending = False)
 Out[43]: 
