@@ -20,7 +20,7 @@ The **explanatory variables** consist of the following 16 components:
 - dependents   (interval)         : 1 - 2
 - phone        (categorical)      : "no",  "yes"
 
-The dataset can be downloaded [here] (https://github.com/debinqiu/ML_Course/files/116846/credit.txt) and more information about this dataset is available on [UCI Machine Learning Data Repository] (https://archive.ics.uci.edu/ml).  
+The dataset can be downloaded from [here] (https://github.com/debinqiu/ML_Course/files/116846/credit.txt) and more information about this dataset is available on [UCI Machine Learning Data Repository] (https://archive.ics.uci.edu/ml).  
 
 To identify the risky bank loans, we build a random forest model using different programming languages in SAS, R and Python.
 
