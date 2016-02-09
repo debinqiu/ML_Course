@@ -147,3 +147,117 @@ phone                        5.359734
 In addition, we give two extra results. The first result is the importance of explanatory variables. The function `varImpPlot` gives us the plot of important explanatory variabls which is shown as follows. We can see that the first three most important explanatory variables are amount, checking_balance and age. 
 
 The second result is the accuracy versus different number of trees. The accuracy trend shown in the following graph indicates the highest accuracy 77% obtained at ntree = 750. In fact, when the ntree = 100, we can achieve 76.3% accuracy which is very close to 77% but the computation is less intensive in this case. 
+
+## Run random forest in Python##
+Python `sklearn` provides numerous methods to perform machine learning. We now use function `RandomForestClassifier` to conduct the classification task.  
+
+```python
+import pandas as pd
+from sklearn.cross_validation import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import sklearn.metrics
+from sklearn.preprocessing import LabelEncoder
+import matplotlib as plt
+
+credit = pd.read_csv("credit.txt",sep = "\t")
+
+credit = credit.dropna()
+targets = LabelEncoder().fit_transform(credit['default'])
+
+predictors = credit.ix[:,credit.columns != 'default']
+
+# Recode categorical variables as numeric variables
+predictors.dtypes
+for i in range(0,len(predictors.dtypes)):
+    if predictors.dtypes[i] != 'int64':
+        predictors[predictors.columns[i]] = LabelEncoder().fit_transform(predictors[predictors.columns[i]])
+
+pred_train, pred_test, tar_train, tar_test = train_test_split(predictors, targets, test_size=.3)
+
+# Build model on training data
+classifier = RandomForestClassifier(n_estimators = 25)
+classifier = classifier.fit(pred_train, tar_train)
+
+# Make predictions on testing data
+predictions = classifier.predict(pred_test)
+
+# Calculate accuracy
+sklearn.metrics.confusion_matrix(tar_test, predictions)
+sklearn.metrics.accuracy_score(tar_test, predictions)
+
+# Fit an extra trees model to the training data 
+model = ExtraTreesClassifier().fit(pred_train, tar_train)
+# Display the relative importance of each attribute
+print(pd.Series(model.feature_importances_, index = predictors.columns).sort_values(ascending = False))
+
+"""
+Running a different number of trees and see the effect
+ of that on the accuracy of the prediction
+"""
+
+ntree = [50,150,250,350,450,550,650,750,850,950,1000]
+accuracy = []
+
+for idx in range(len(ntree)):
+    classifier = RandomForestClassifier(n_estimators = ntree[idx])
+    classifier = classifier.fit(pred_train, tar_train)
+    predictions = classifier.predict(pred_test)
+    accuracy.append(sklearn.metrics.accuracy_score(tar_test,predictions))
+
+pd.Series(accuracy, index = ntree).sort_values(ascending = False)
+
+plt.plot(ntree,accuracy)
+plt.show()
+
+```
+In the above procedure, We first build a random forest with 25 decision trees. This gives us 74% accuracy on the testing data. 
+```python
+# Calculate accuracy
+>>> sklearn.metrics.confusion_matrix(tar_test, predictions)
+Out[39]: 
+array([[189,  32],
+       [ 46,  33]])
+
+>>> sklearn.metrics.accuracy_score(tar_test, predictions)
+Out[40]: 0.73999999999999999
+```
+We also explore the importane of 16 explanatory variables. The first three most important explanatory variables are checking_balance, amount, months_loan_duration which are slightly different from those obtained in R. 
+```python
+# Display the relative importance of each attribute
+print(pd.Series(model.feature_importances_, index = predictors.columns).sort_values(ascending = False))
+checking_balance        0.133015
+amount                  0.109541
+months_loan_duration    0.096196
+age                     0.086818
+employment_duration     0.064515
+credit_history          0.064045
+percent_of_income       0.063428
+purpose                 0.063158
+savings_balance         0.055704
+years_at_residence      0.052617
+job                     0.045315
+existing_loans_count    0.039384
+other_credit            0.038604
+housing                 0.035119
+phone                   0.030843
+dependents              0.021698
+dtype: float64
+```
+Similar to the study in R code, we finally run random forest with different number of decision trees. The results show that we obtain 76% accuracy when the number of trees is 850 or 250. We would definitely choose 250 due to less computation time.  
+```python
+>>> pd.Series(accuracy, index = ntree).sort_values(ascending = False)
+Out[43]: 
+850     0.760000
+250     0.760000
+1000    0.756667
+950     0.756667
+750     0.756667
+650     0.756667
+450     0.756667
+350     0.756667
+550     0.743333
+50      0.740000
+150     0.736667
+dtype: float64
+```
