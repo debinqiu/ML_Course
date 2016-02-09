@@ -76,7 +76,7 @@ PROC FREQ DATA = rfscore;
 TABLES default*I_default /norow nocol nopct;
 RUN;
 ```
-We can see several outputs such as Model Information, Fit Statistics, Loss Reduction Variable Importance from HPFOREST procedure, but we more care about the predicted accuracy on the testing data. The confusion matrix on testing data below shows the fitted random forest correctly classifies 74.3% of the default loans, which is much better than that from a single decision fitted in the first assignment. Thus, random forest can improve the accuracy of decision tree dramatically in some cases. 
+We can see several outputs such as Model Information, Fit Statistics, Loss Reduction Variable Importance from HPFOREST procedure, but we more care about the predicted accuracy on the testing data. The confusion matrix on testing data below shows the fitted random forest correctly classifies 74.3% of the default loans, which is much better than that from a single decision fitted in the first assignment. Thus, random forest can improve the accuracy of decision tree dramatically for this dataset. 
 ![conf_mat_sas](https://cloud.githubusercontent.com/assets/16762941/12930943/3237dd40-cf49-11e5-9344-54502bf9c688.png)
 
 ## Run random forest tree in R##
