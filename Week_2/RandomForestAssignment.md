@@ -77,6 +77,7 @@ TABLES default*I_default /norow nocol nopct;
 RUN;
 ```
 We can see several outputs such as Model Information, Fit Statistics, Loss Reduction Variable Importance from HPFOREST procedure, but we more care about the predicted accuracy on the testing data. The confusion matrix on testing data below shows the fitted random forest correctly classifies 74.3% of the default loans, which is much better than that from a single decision fitted in the first assignment. Thus, random forest can improve the accuracy of decision tree dramatically in some cases. 
+![conf_mat_sas](https://cloud.githubusercontent.com/assets/16762941/12930943/3237dd40-cf49-11e5-9344-54502bf9c688.png)
 
 ## Run random forest tree in R##
 We now give the R code to run the random forest, which is realized using `randomForest` package. We use the same strategy as explained above. The code is as follows. 
@@ -145,8 +146,10 @@ phone                        5.359734
 > plot(ntree, accuracy, type = 'l', main = 'acuracy vs. ntree')
 ```
 In addition, we give two extra results. The first result is the importance of explanatory variables. The function `varImpPlot` gives us the plot of important explanatory variabls which is shown as follows. We can see that the first three most important explanatory variables are amount, checking_balance and age. 
+![importance_r](https://cloud.githubusercontent.com/assets/16762941/12930935/235a8d18-cf49-11e5-98ca-9ce1aa417d38.png)
 
 The second result is the accuracy versus different number of trees. The accuracy trend shown in the following graph indicates the highest accuracy 77% obtained at ntree = 750. In fact, when the ntree = 100, we can achieve 76.3% accuracy which is very close to 77% but the computation is less intensive in this case. 
+![accuracy_r](https://cloud.githubusercontent.com/assets/16762941/12930933/234a4bce-cf49-11e5-8b35-b2c8fb9fae97.png)
 
 ## Run random forest in Python##
 Python `sklearn` provides numerous methods to perform machine learning. We now use function `RandomForestClassifier` to conduct the classification task.  
@@ -261,5 +264,6 @@ Out[43]:
 150     0.736667
 dtype: float64
 ```
+![accuracy_p](https://cloud.githubusercontent.com/assets/16762941/12930934/23526c6e-cf49-11e5-9a11-de2044197afc.png)
 
 ## Run random forest in Apache Spark##
