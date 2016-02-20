@@ -84,7 +84,7 @@ The 'Lar Selection Summary' table shows that we obtain the optimal model at step
 Now let us look at the changes of coefficients when explanatory variables are added sequentially. The graph shows that at step 14, Hits, Walks, Runs and AtBat were most strongly associated with salary. Of them, AtBat were negatively associated with salary and the others were positively associated with salary. These 14 variables accounted for 65.2% of the variance in the salary response variable.  
 ![lasso2](https://cloud.githubusercontent.com/assets/16762941/13198898/0edacd92-d7e3-11e5-8d20-804262571895.png)
 
-We can also see from the graph of trend of reduction of ASE for both training and testing data. It is concluded that the prediction accuracy is rather stable for the two datasets.
+We can also see from the graph of trend of reduction of ASE for both training and testing data that the prediction accuracy is rather stable for the two datasets.
 
 ![lasso4](https://cloud.githubusercontent.com/assets/16762941/13198900/0edbb2fc-d7e3-11e5-8ece-a9083bf3268a.png)
 
