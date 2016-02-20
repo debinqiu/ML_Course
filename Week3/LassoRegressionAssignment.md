@@ -54,15 +54,18 @@ MODEL Salary1 = AtBat Hits HmRun Runs RBI Walks Years
                League1 Division1 PutOuts Assists Errors NewLeague1;
 RUN;
 ```
+![linearregression](https://cloud.githubusercontent.com/assets/16762941/13198902/0edfdc92-d7e3-11e5-81a4-8dab903e7e30.png)
 
-Now we fit a Lasso regression on the Hitters data. We first split the entire dataset into training and testing data, respectively. 
+Now we fit a Lasso regression on the Hitters data. We first split the entire dataset into training and testing data with 70% and 30% of observations, respectively. 
 ```
 TITLE 'Split into training and testing data';
 PROC SURVEYSELECT DATA = Hitters_New OUT = traintest SEED = 123
 SAMPRATE = 0.7 METHOD = SRS OUTALL;
 RUN;
 ```
-To fit the Lasso regression, we use the GLMSELECT procedure in SAS as follows. 
+![traintest](https://cloud.githubusercontent.com/assets/16762941/13198903/0ee22ca4-d7e3-11e5-9551-eaaf80b6bd10.png)
+
+To fit the Lasso regression, we use the GLMSELECT procedure in SAS as follows. The least angle regression algorithm with k=10 fold cross validation was used to estimate the lasso regression model in the training set, and the model was validated using the test set. The change in the cross validation average (mean) squared error at each step was used to identify the best subset of predictor variables.
 ```
 ODS GRAPHICS ON;
 TITLE 'Run a Lasso regression';
@@ -75,3 +78,6 @@ MODEL Salary1 = AtBat Hits HmRun Runs RBI Walks Years
                CVMETHOD = RANDOM(10);
 RUN;
 ```
+The 'Lar Summary' Table shows that we obtain the optimal model at step 14 with biggest reduction in residual sum of squares [with biggest CV PRESS]. In this selected model, of 19 explanatory variables, 14 are retained and the rest don't contribute to predict the salary. The selected variables are CRBI, Hits, Walks, PutOuts, CHits, Division1 (Division), Assists, CWalks, HmRun, Errors, AtBat, NewLeague1 (NewLeague), Years and Runs. 
+
+Now let us look at the changes of coefficients when explanatory variables are added sequentially. The graph shows that at step 14, Hits, Walks, Runs and AtBat were most strongly associated with salary. Of them, AtBat were negatively associated with salary and the others were positively associated with salary. These 14 variables accounted for 65.2% of the variance in the salary response variable.  
