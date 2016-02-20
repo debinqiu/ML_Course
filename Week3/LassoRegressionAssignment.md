@@ -86,7 +86,7 @@ Now let us look at the changes of coefficients when explanatory variables are ad
 
 We can also see from the graph of trend of reduction of ASE for both training and testing data. It is concluded that the prediction accuracy is rather stable for the two datasets.
 
-
+![lasso4](https://cloud.githubusercontent.com/assets/16762941/13198900/0edbb2fc-d7e3-11e5-8ece-a9083bf3268a.png)
 
 The fitting information of the selected model are shown as follows.
 
