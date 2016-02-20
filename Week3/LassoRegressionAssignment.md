@@ -88,6 +88,6 @@ The fitting information of the selected model are shown as follows.
 
 ![lasso5](https://cloud.githubusercontent.com/assets/16762941/13198901/0edbf546-d7e3-11e5-98eb-0618af68c95c.png)
 
-The final model is 
+Therefore, the salary can be predicted by the linear equation as follows.
 
 Salary = 140.133 - 1.1452\*AtBat + 5.2491\*Hits - 1.7184\*HmRun - 0.5985\*Runs + 5.3258\*Walks - 6.7554\*Years + 0.2302\*CHits + 0.8002\*CRBI - 0.5555\*CWalks - 105.8088\*Division +0.2639\*PutOuts - 0.048385\*Assists - 0.9563\*Errors - 21.4788\*NewLeague.
