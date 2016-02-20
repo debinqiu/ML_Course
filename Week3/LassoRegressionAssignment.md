@@ -79,5 +79,15 @@ MODEL Salary1 = AtBat Hits HmRun Runs RBI Walks Years
 RUN;
 ```
 The 'Lar Summary' Table shows that we obtain the optimal model at step 14 with biggest reduction in residual sum of squares [with biggest CV PRESS]. In this selected model, of 19 explanatory variables, 14 are retained and the rest don't contribute to predict the salary. The selected variables are CRBI, Hits, Walks, PutOuts, CHits, Division1 (Division), Assists, CWalks, HmRun, Errors, AtBat, NewLeague1 (NewLeague), Years and Runs. 
+![lasso1](https://cloud.githubusercontent.com/assets/16762941/13198897/0eda92aa-d7e3-11e5-9fd2-a2230732de1d.png)
 
 Now let us look at the changes of coefficients when explanatory variables are added sequentially. The graph shows that at step 14, Hits, Walks, Runs and AtBat were most strongly associated with salary. Of them, AtBat were negatively associated with salary and the others were positively associated with salary. These 14 variables accounted for 65.2% of the variance in the salary response variable.  
+![lasso2](https://cloud.githubusercontent.com/assets/16762941/13198898/0edacd92-d7e3-11e5-8d20-804262571895.png)
+
+The fitting information of the selected model are shown as follows.
+
+![lasso5](https://cloud.githubusercontent.com/assets/16762941/13198901/0edbf546-d7e3-11e5-98eb-0618af68c95c.png)
+
+The final model is 
+
+Salary = 140.133 - 1.1452\*AtBat + 5.2491\*Hits - 1.7184\*HmRun - 0.5985\*Runs + 5.3258\*Walks - 6.7554\*Years + 0.2302\*CHits + 0.8002\*CRBI - 0.5555\*CWalks - 105.8088\*Division +0.2639\*PutOuts - 0.048385\*Assists - 0.9563\*Errors - 21.4788\*NewLeague.
