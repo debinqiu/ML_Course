@@ -45,7 +45,7 @@ Salary1 = INPUT(Salary, comma6.);
 DROP League NewLeague Division Salary;
 RUN;
 ```
-Secondly, we fit a classic linear regression to check whether we have to use a more complex fitting methodology (penalized linear regression) or not. The parameter estimates from classic linear regression below show that 13 explanatory variables are not relevant to the salary, so it is appropriate to perform the variable selection. 
+Secondly, we fit a classic linear regression to check whether we have to use a more complex fitting methodology (penalized linear regression) or not. The parameter estimates from classic linear regression below show that of 19 explanatory variables, 13 were not relevant to the salary, so it is appropriate to perform the variable selection. 
 ```
 TITLE 'Run a classic linear regression';
 PROC REG DATA = Hitters_New;
@@ -78,11 +78,15 @@ MODEL Salary1 = AtBat Hits HmRun Runs RBI Walks Years
                CVMETHOD = RANDOM(10);
 RUN;
 ```
-The 'Lar Summary' Table shows that we obtain the optimal model at step 14 with biggest reduction in residual sum of squares [with biggest CV PRESS]. In this selected model, of 19 explanatory variables, 14 are retained and the rest don't contribute to predict the salary. The selected variables are CRBI, Hits, Walks, PutOuts, CHits, Division1 (Division), Assists, CWalks, HmRun, Errors, AtBat, NewLeague1 (NewLeague), Years and Runs. 
+The 'Lar Selection Summary' table shows that we obtain the optimal model at step 14 with biggest reduction in residual sum of squares [with biggest CV PRESS]. In this selected model, of 19 explanatory variables, 14 are retained and the rest don't contribute to predict the salary. The selected variables are CRBI, Hits, Walks, PutOuts, CHits, Division1 (Division), Assists, CWalks, HmRun, Errors, AtBat, NewLeague1 (NewLeague), Years and Runs. 
 ![lasso1](https://cloud.githubusercontent.com/assets/16762941/13198897/0eda92aa-d7e3-11e5-9fd2-a2230732de1d.png)
 
 Now let us look at the changes of coefficients when explanatory variables are added sequentially. The graph shows that at step 14, Hits, Walks, Runs and AtBat were most strongly associated with salary. Of them, AtBat were negatively associated with salary and the others were positively associated with salary. These 14 variables accounted for 65.2% of the variance in the salary response variable.  
 ![lasso2](https://cloud.githubusercontent.com/assets/16762941/13198898/0edacd92-d7e3-11e5-8d20-804262571895.png)
+
+We can also see from the graph of trend of reduction of ASE for both training and testing data. It is concluded that the prediction accuracy is rather stable for the two datasets.
+
+
 
 The fitting information of the selected model are shown as follows.
 
