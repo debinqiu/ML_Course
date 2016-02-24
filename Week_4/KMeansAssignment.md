@@ -18,3 +18,10 @@ In this assignment, we are assigned to run k-means clustering analysis. For this
 >>> snsdata_clean['gender'] = preprocessing.LabelEncoder().fit_transform(snsdata_clean['gender'])
 >>> del snsdata_clean['gradyear'] # drop useless variable 'gradyear'
 ```
+
+Before runing a k-means clustering analysis, we first need to standardize each feature so that each of them has mean 0 and standard deviation 1 because euclidean distance is very sensitive to the scales of variables. This can be done as follows.
+```
+# standardize each variable so that mean = 0 and std = 1
+>>> for name in snsdata_clean.columns:
+        snsdata_clean[name] = preprocessing.scale(snsdata_clean[name]).astype('float64')
+```
