@@ -135,3 +135,6 @@ cluster
 [3 rows x 40 columns]
 ```
 We only interpret the results shown in the outputs above because it is difficult to display all centroid means for all 39 features. The means on the clustering variables showed that, compared to the other clusters, **gender, age** in cluster 2 has levels on the clustering variables. All the other variables shown above in cluster 1 have high levels on the clustering variables compared with other clusters.    
+
+
+Note: If you want to get the entire Python code for this assignment, please click [here](https://github.com/debinqiu/ML_Course/blob/master/Week_4/KMeansClustering.py).
