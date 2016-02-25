@@ -26,7 +26,7 @@ Before runing a k-means clustering analysis, we first need to standardize each f
         snsdata_clean[name] = preprocessing.scale(snsdata_clean[name]).astype('float64')
 ```
 
-Now we can perform k-means clustering analysis on those 39 standardized features. For simplicity, we only examine the number of clusters from 1 to 20, although they can be up to 39 clusters. In effect, it is rather safe to only check 1-10 clusters. The Python code to run k-means clustering is as follows.
+Now we can perform k-means clustering analysis on those 39 standardized features. For simplicity, we only examine the number of clusters from 1 to 10, although they can be up to 39 clusters. In effect, it is rather safe to only check 1-10 clusters for this dataset. The Python code to run k-means clustering is as follows.
 ```python
 # perform k-means clustering for each k between 1 - 20   
 >>> from scipy.spatial.distance import cdist
@@ -35,9 +35,55 @@ Now we can perform k-means clustering analysis on those 39 standardized features
 >>> meandist = []
 
 >>> for k in clusters:
-        model = KMeans(n_clusters = k)
+        model = KMeans(n_clusters = k, random_state = 123)
         model.fit(snsdata_clean)
         clusassign = model.predict(snsdata_clean)
         meandist.append(sum(np.min(cdist(snsdata_clean,model.cluster_centers_,'euclidean'), axis = 1))/snsdata_clean.shape[0])
 ```
-Since we have claculated the mean distance for each cluster, we can now plot the Elbow graph by checking the average distance versus the number of cluster which is shown as follows. The Elbow graph suggests us to choose the number of cluster as 5 because there is a small jump when the number of cluster is 6. 
+Since we have claculated the mean distance for each cluster, we can now plot the Elbow graph by checking the average distance versus the number of cluster which is shown as follows. The Elbow graph suggests us to choose the number of cluster as 3 or 4 because there is a small jump when the number of cluster is 5. 
+
+```python
+# plot the elbow graph    
+>>> plt.plot(clusters, meandist)
+>>> plt.xlabel('Number of clusters')
+>>> plt.ylabel('Average distance')
+>>> plt.title('Selecting k with the Elbow Method')
+>>> plt.show()
+```
+
+To visualize the separation of each cluster, canonical discriminant analyses is used to reduce the 39 clustering variables down a few variables that accounted for most of the variance in the clustering variables. We first examine results when the number of clusters k = 3. A scatterplot of the first two canonical variables by cluster indicated that **Cluster 1** and **Cluster 2** are rather packed leading to low within cluster variance, but **Cluster 3** is rather spreadout resulting in high within cluster variance. 
+```python
+# interpret  cluster solution
+>>> from sklearn.decomposition import PCA
+
+>>> def kmeans(k):
+        model = KMeans(n_clusters = k,random_state = 123)
+        model.fit(snsdata_clean)
+        # plot clusters
+        pca_2 = PCA(2)
+        plot_columns = pca_2.fit_transform(snsdata_clean)
+        cols = ['r','g','b','y','m','c']
+        legentry = []
+        legkey = []
+        for i in range(k):
+            rowindex = model.labels_ == i
+            plot_ = plt.scatter(plot_columns[rowindex,0],plot_columns[rowindex,1], c = cols[i],)
+            exec('sc' + str(i) + " = plot_")
+            legentry.append(eval('sc' + str(i)))
+            legkey.append('Cluster ' + str(i + 1))
+        plt.legend(tuple(legentry),tuple(legkey),loc = 'lower right')
+        plt.xlabel('Canonical variable 1')
+        plt.ylabel('Canonical variable 2')
+        plt.title('Scatterplot of Canonical Variables for ' + str(k) + ' Clusters')
+        plt.show() 
+# try k = 3 
+>>> kmeans(3)
+```
+
+Secondly, we examine results when k = 4. We can see that **Cluster 2** and **Cluster 4** are packed but **Cluster 3** is rather spreadout. Also, **Cluster 1** and **Cluster 4** are overlap too much indicating that the results of k = 3 is superior to those of k = 4. 
+```python
+# try k = 4 
+>>> kmeans(4)
+```
+
+Therefore, we select k = 3 and calculate the size and centroid means of each cluster as follows.
