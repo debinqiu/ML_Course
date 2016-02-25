@@ -41,7 +41,7 @@ Now we can perform k-means clustering analysis on those 39 standardized features
         meandist.append(sum(np.min(cdist(snsdata_clean,model.cluster_centers_,'euclidean'), axis = 1))/snsdata_clean.shape[0])
 ```
 Since we have claculated the mean distance for each cluster, we can now plot the Elbow graph by checking the average distance versus the number of cluster which is shown as follows. The Elbow graph suggests us to choose the number of cluster as 3 or 4 because there is a small jump when the number of cluster is 5. 
-
+![figure_1](https://cloud.githubusercontent.com/assets/16762941/13307691/2215d220-db3b-11e5-8ef1-342db76203aa.png)
 ```python
 # plot the elbow graph    
 >>> plt.plot(clusters, meandist)
@@ -79,11 +79,11 @@ To visualize the separation of each cluster, canonical discriminant analyses is 
 # try k = 3 
 >>> kmeans(3)
 ```
-
+![figure_1-3clusters](https://cloud.githubusercontent.com/assets/16762941/13307696/26039174-db3b-11e5-91db-2ab48cc1b774.png)
 Secondly, we examine results when k = 4. We can see that **Cluster 2** and **Cluster 4** are packed but **Cluster 3** is rather spreadout. Also, **Cluster 1** and **Cluster 4** are overlap too much indicating that the results of k = 3 is superior to those of k = 4. 
 ```python
 # try k = 4 
 >>> kmeans(4)
 ```
-
+![figure_1-4clusters](https://cloud.githubusercontent.com/assets/16762941/13307699/27dde422-db3b-11e5-9784-d3fa5b146771.png)
 Therefore, we select k = 3 and calculate the size and centroid means of each cluster as follows.
