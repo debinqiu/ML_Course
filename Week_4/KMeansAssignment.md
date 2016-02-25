@@ -86,7 +86,7 @@ Secondly, we examine results when k = 4. We can see that **Cluster 2** and **Clu
 >>> kmeans(4)
 ```
 ![figure_1-4clusters](https://cloud.githubusercontent.com/assets/16762941/13307699/27dde422-db3b-11e5-9784-d3fa5b146771.png)
-Therefore, we select k = 3 and calculate the size and centroid means of each cluster as follows. We can see that **Cluster 3** has the largest number of observations, i.e., 69.93\% but **Cluster 1** has only 10.71\% of observations. 
+Therefore, we select k = 3 and calculate the size and centroid means of each cluster as follows. We can see that **Cluster 3** has the largest number of observations, i.e., 69.93% but **Cluster 1** has only 10.71% of observations. 
 ```python
 >>> model3 = KMeans(n_clusters = 3).fit(snsdata_clean)
 >>> snsdata_clean.reset_index(level = 0, inplace = True)
@@ -101,4 +101,10 @@ Out[41]:
 1     4647
 0     2569
 Name: cluster, dtype: int64
+```
+We finally look at the centroid means of each cluster for each features. 
+```python
+>>> clustergrp = snsdata_merge.groupby('cluster').mean()
+>>> print ("Clustering variable means by cluster")
+>>> print(clustergrp)
 ```
