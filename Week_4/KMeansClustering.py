@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 from sklearn import preprocessing
 from sklearn.cluster import KMeans
 
-import os
-os.chdir(r'C:\Users\qiude\Desktop\Coursera\Data Analysis\Week 4')
-
 # import csv data
 snsdata = pd.read_csv("snsdata.csv")
 # drop the missing data
