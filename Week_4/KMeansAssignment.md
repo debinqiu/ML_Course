@@ -107,4 +107,31 @@ We finally look at the centroid means of each cluster for each features.
 >>> clustergrp = snsdata_merge.groupby('cluster').mean()
 >>> print ("Clustering variable means by cluster")
 >>> print(clustergrp)
+Clustering variable means by cluster
+                index    gender       age   friends  basketball  football  \
+cluster                                                                     
+0        16512.845854 -0.326180 -0.050493  0.251594    0.493595  0.461757   
+1        13816.222940  1.961558  0.313298 -0.169918    0.033028  0.254605   
+2        14916.706177 -0.493025 -0.078991  0.008533   -0.084670 -0.141128   
+
+           soccer  softball  volleyball  swimming    ...       blonde  \
+cluster                                              ...                
+0        0.265626  0.245008    0.269518  0.316393    ...     0.196089   
+1       -0.025290 -0.208723   -0.167954 -0.116565    ...    -0.042956   
+2       -0.033645  0.020282    0.005247 -0.016150    ...    -0.018115   
+
+             mall  shopping   clothes  hollister  abercrombie       die  \
+cluster                                                                   
+0        0.891758  0.753866  1.145443   0.845561     0.864245  0.728301   
+1       -0.213791 -0.434151 -0.208827  -0.127641    -0.123796 -0.067070   
+2       -0.077279  0.004814 -0.117471  -0.094055    -0.097979 -0.092878   
+
+            death     drunk     drugs  
+cluster                                
+0        0.540961  0.722546  0.922997  
+1       -0.078481 -0.084363 -0.097185  
+2       -0.061054 -0.087211 -0.114334  
+
+[3 rows x 40 columns]
 ```
+We only interpret the results shown in the outputs above because it is difficult to display all centroid means for all 39 features. The means on the clustering variables showed that, compared to the other clusters, **gender, age** in cluster 2 has levels on the clustering variables. All the other variables shown above in cluster 1 have high levels on the clustering variables compared with other clusters.    
